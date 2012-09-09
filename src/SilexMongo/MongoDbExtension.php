@@ -1,7 +1,7 @@
 <?php
 
 
-namespace SilexExtension;
+namespace SilexMongo;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;

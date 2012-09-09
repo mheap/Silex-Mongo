@@ -1,12 +1,12 @@
 <?php
 
-namespace SilexExtension\Tests\Extension;
+namespace SilexMongo\Tests\Extension;
 
 use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 
-use SilexExtension\MongoDbExtension;
+use SilexMongo\MongoDbExtension;
 
 class MongoDbExtensionTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,9 +20,7 @@ class MongoDbExtensionTest extends \PHPUnit_Framework_TestCase
     public function testRegister()
     {
         $app = new Application();
-        $app->register(new MongoDbExtension(), array(
-            'mongodb.class_path' => __DIR__ . '/../../../vendor/mongodb/lib'
-        ));
+        $app->register(new MongoDbExtension(), array());
         
         $app->get('/', function() use($app) {
             $app['mongodb'];    
@@ -41,7 +39,6 @@ class MongoDbExtensionTest extends \PHPUnit_Framework_TestCase
         
         $app = new Application();
         $app->register(new MongoDbExtension(), array(
-            'mongodb.class_path' => __DIR__ . '/../../../vendor/mongodb/lib',
             'mongodb.connection' => array(
                 'configuration' => function($configuration) use($test) {
                     $test->assertInstanceOf('Doctrine\MongoDB\Configuration', $configuration);     
@@ -65,7 +62,6 @@ class MongoDbExtensionTest extends \PHPUnit_Framework_TestCase
         
         $app = new Application();
         $app->register(new MongoDbExtension(), array(
-            'mongodb.class_path' => __DIR__ . '/../../../vendor/mongodb/lib',
             'mongodb.connection' => array(
                 'server'    => '127.0.0.1:9999',
                 'options'   => array(

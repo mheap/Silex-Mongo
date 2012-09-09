@@ -1,7 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../functions.php';
-require_once __DIR__ . '/../silex.phar';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class MyListener {
     function postConnect() { 
@@ -11,9 +10,7 @@ class MyListener {
 
 $app = new Silex\Application();
 
-$app['autoloader']->registerNamespace('SilexExtension', __DIR__ . '/../src');
-$app->register(new SilexExtension\MongoDbExtension(), array(
-    'mongodb.class_path'    => __DIR__ . '/../vendor/mongodb/lib',
+$app->register(new SilexMongo\MongoDbExtension(), array(
     'mongodb.connection'    => array(
         'configuration' => function($configuration) {
             $configuration->setLoggerCallable(function($logs) {
